@@ -5,10 +5,13 @@ import {useSelector} from "react-redux";
 import {rootReducerType} from "./reducers/Store";
 
 function App() {
-    console.log(useSelector<rootReducerType,rootReducerType>(state => state))
+
+    let copyState =(useSelector<rootReducerType,rootReducerType>(state => state))
+    console.log(copyState)
   return (
     <div className="App">
         <Todolists />
+        {/*<Clock />*/}
     </div>
   );
 }

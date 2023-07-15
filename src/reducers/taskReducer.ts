@@ -51,8 +51,14 @@ export const taskReducer = (state: TasksStateType = initialTasks, action: BossTy
                 } : el)
             }
         }
-        case "CHANGE-TASK-TITLE":{
-            return {...state,[action.payload.todolistID]:state[action.payload.todolistID].map(el=>el.id===action.payload.taskID?{...el,title:action.payload.Newtitle}:el)}
+        case "CHANGE-TASK-TITLE": {
+            return {
+                ...state,
+                [action.payload.todolistID]: state[action.payload.todolistID].map(el => el.id === action.payload.taskID ? {
+                    ...el,
+                    title: action.payload.Newtitle
+                } : el)
+            }
         }
         default:
             return state
@@ -65,6 +71,7 @@ export type BossType = addTodolistACType
     | removeTaskACType
     | changeStatusTaskACType
     | changeTaskTitleACType
+
 
 
 export type addTaskACType = ReturnType<typeof addTaskAC>
@@ -88,7 +95,6 @@ export const changeStatusTaskAC = (todolistID: string, taskID: string, isDone: b
         payload: {todolistID, taskID, isDone}
     } as const
 }
-
 export type changeTaskTitleACType = ReturnType<typeof changeTaskTitleAC>
 export const changeTaskTitleAC = (todolistID: string, taskID: string, Newtitle: string) => {
     return {

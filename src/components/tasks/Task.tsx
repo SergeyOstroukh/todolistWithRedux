@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo, useCallback} from 'react';
 import {CheckBox} from "../../universalComponents/CheckBox";
 import {Button} from "../../universalComponents/Button";
 import {EditableSpan} from "../../universalComponents/EditableSpan";
@@ -12,20 +12,21 @@ export type TaskPropsType={
     taskID:string
 }
 
-export const Task = (props:TaskPropsType) => {
+export const Task = memo((props:TaskPropsType) => {
     const{title,isDone,todolistID,taskID}=props
 
     const dispatch = useDispatch()
 
-    const removeTask = ()=>{
+    const removeTask = useCallback(()=>{
         dispatch(removeTaskAC(todolistID,taskID))
-    }
+    },[dispatch])
     const changeStatus =(checked:boolean)=>{
         dispatch(changeStatusTaskAC(todolistID,taskID,checked))
     }
     const changeTaskTitleOnDoubleClick =(title:string)=>{
         dispatch(changeTaskTitleAC(todolistID,taskID,title))
     }
+
 
     return (
         <div>
@@ -34,5 +35,5 @@ export const Task = (props:TaskPropsType) => {
                 <Button name={'x'} callback={removeTask}/>
         </div>
     );
-};
+});
 

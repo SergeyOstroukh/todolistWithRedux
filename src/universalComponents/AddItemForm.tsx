@@ -1,12 +1,12 @@
-import React, {ChangeEvent,KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, memo, useState} from 'react';
 
 export type AddItemForm ={
     callback:(value:string)=>void
 }
 
-export const AddItemForm = (props:AddItemForm) => {
+export const AddItemForm =(props:AddItemForm) => {
     const{callback}=props
-
+    console.log("item form")
     const[value,setValue]=useState<string>('')
     const[error,seterror]=useState<string|null>(null)
 
@@ -37,5 +37,5 @@ export const AddItemForm = (props:AddItemForm) => {
             }
         </div>
     );
-};
+}
 

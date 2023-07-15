@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo, useCallback} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "../../reducers/Store";
 import {addTodolistAC, TodolistType} from "../../reducers/todolistReducer";
@@ -6,12 +6,12 @@ import {Todo} from "./Todo";
 import {AddItemForm} from "../../universalComponents/AddItemForm";
 
 
-export const Todolists = () => {
+export const Todolists = memo(() => {
     const dispatch = useDispatch()
     const todolists = useSelector<rootReducerType,TodolistType[]>(state => state.todolist)
-    const addTodolist =(title:string)=>{
+    const addTodolist =useCallback((title:string)=>{
         dispatch(addTodolistAC(title))
-    }
+    },[dispatch])
 
 
     return (
@@ -32,5 +32,5 @@ export const Todolists = () => {
             }
         </div>
     );
-};
+});
 
